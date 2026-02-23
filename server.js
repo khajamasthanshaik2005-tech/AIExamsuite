@@ -20,7 +20,10 @@ app.use(helmet());
 
 // CORS
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: [
+    "https://aiexamsuite-frontend.onrender.com",  // your deployed frontend
+    "http://localhost:5173"                       // local frontend for testing
+  ],
   credentials: true
 }));
 
