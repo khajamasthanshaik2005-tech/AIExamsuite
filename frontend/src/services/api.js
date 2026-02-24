@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Backend API base URL from .env
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL + "/api",
   headers: {
@@ -8,7 +9,7 @@ const api = axios.create({
   withCredentials: true,
 });
 
-// Add token to every request
+// Attach token to headers
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -17,7 +18,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle expired login
+// Handle unauthorized responses
 api.interceptors.response.use(
   (response) => response,
   (error) => {
