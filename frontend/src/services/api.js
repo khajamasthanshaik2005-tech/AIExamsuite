@@ -1,23 +1,23 @@
 import axios from "axios";
 
-// Backend deployed URL
 const api = axios.create({
-  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`, 
-  headers: { "Content-Type": "application/json" },
+  baseURL: import.meta.env.VITE_API_BASE_URL + "/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
   withCredentials: true,
 });
 
-// Add token to request
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// Add token to every request
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-// Redirect to login if unauthorized
+// Handle expired login
 api.interceptors.response.use(
   (response) => response,
   (error) => {
