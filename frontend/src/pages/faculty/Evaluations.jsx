@@ -191,12 +191,16 @@ export default function Evaluations() {
       alert('PDF not available for this submission')
       return
     }
-    const backendUrl = (import.meta.env && import.meta.env.VITE_BACKEND_URL) || 'http://localhost:5000'
+    const backendUrl =
+      (import.meta.env && (import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_BASE_URL)) ||
+      'http://localhost:5000'
     window.open(`${backendUrl}/${attempt.answerScriptPath}`, '_blank')
   }
 
   const handleViewAnswerKey = (key) => {
-    const backendUrl = (import.meta.env && import.meta.env.VITE_BACKEND_URL) || 'http://localhost:5000'
+    const backendUrl =
+      (import.meta.env && (import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_BASE_URL)) ||
+      'http://localhost:5000'
     window.open(`${backendUrl}/${key.path}`, '_blank')
   }
 

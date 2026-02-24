@@ -29,7 +29,8 @@ export default function Register() {
       await register(formData)
       navigate('/')
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed')
+      const apiMessage = err.response?.data?.message || err.response?.data?.error
+      setError(apiMessage || 'Registration failed')
     } finally {
       setLoading(false)
     }

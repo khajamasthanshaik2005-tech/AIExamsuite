@@ -11,9 +11,20 @@ const errorHandler = (err, req, res, next) => {
     error = { message, statusCode: 404 };
   }
 
-  // Mongoose duplicate key
+  // Mongoose duplicate key (e.g. unique email or studentId)
   if (err.code === 11000) {
-    const message = 'Duplicate field value entered';
+    const duplicateFields = err.keyValue || {};
+    const fieldName = Object.keys(duplicateFields)[0] || 'field';
+
+    let message;
+    if (fieldName === 'email') {
+      message = 'Email is already registered. Please sign in instead.';
+    } else if (fieldName === 'studentId') {
+      message = 'Student ID is already registered.';
+    } else {
+      message = `Duplicate value for ${fieldName}. Please use a different value.`;
+    }
+
     error = { message, statusCode: 400 };
   }
 

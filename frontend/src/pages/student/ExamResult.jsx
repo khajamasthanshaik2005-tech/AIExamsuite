@@ -35,7 +35,9 @@ export default function ExamResult() {
 
   const handleDownload = () => {
     if (!data?.attempt?.answerScriptPath) return
-    const backendUrl = (import.meta.env && import.meta.env.VITE_BACKEND_URL) || 'http://localhost:5000'
+    const backendUrl =
+      (import.meta.env && (import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_BASE_URL)) ||
+      'http://localhost:5000'
     window.open(`${backendUrl}/${data.attempt.answerScriptPath}`, '_blank')
   }
 

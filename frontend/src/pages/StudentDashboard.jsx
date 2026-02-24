@@ -10,7 +10,9 @@ export default function StudentDashboard() {
   const [expandedId, setExpandedId] = useState(null)
   const [subjectDataMap, setSubjectDataMap] = useState({})
   const [loadingSubjectId, setLoadingSubjectId] = useState(null)
-  const uploadsBase = (import.meta.env && import.meta.env.VITE_BACKEND_URL) || 'http://localhost:5000'
+  const uploadsBase =
+    (import.meta.env && (import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_BASE_URL)) ||
+    'http://localhost:5000'
 
   useEffect(() => {
     fetchOverview()

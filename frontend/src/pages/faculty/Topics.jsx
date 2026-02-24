@@ -5,7 +5,9 @@ import { Plus, Trash2, Edit2, Tag, Upload } from 'lucide-react'
 import api from '../../services/api'
 
 export default function FacultyTopics() {
-  const uploadsBase = (import.meta.env && import.meta.env.VITE_BACKEND_URL) || 'http://localhost:5000'
+  const uploadsBase =
+    (import.meta.env && (import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_BASE_URL)) ||
+    'http://localhost:5000'
   const [searchParams] = useSearchParams()
   const unitId = searchParams.get('unit')
   const unitName = searchParams.get('unitName')
